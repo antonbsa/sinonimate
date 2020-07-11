@@ -1,41 +1,39 @@
 const express = require('express')
-const app = express()
 const cheerio = require('cheerio')
-
 const request = require('request-promise')
 const { send } = require('process')
-const hostname = 'https://www.sinonimos.com.br/'
-const path = 'teste'
+const app = express()
 
 
-request({url: `${hostname}${path}`, encoding: 'binary'}, function(err, response, body) {
 
-if (err) return console.error(err)
+    const hostname = 'https://www.sinonimos.com.br/'
+    const path = 'teste'
+    
+    request({url: `${hostname}${path}`, encoding: 'binary'}, function(err, response, body) {
 
-let $ = cheerio.load(body)
+        if (err) return console.error(err)
 
-console.log('Sentidos:')
-let sentido = $('div.sentido').each( function () {
-    console.log(`${$(this).text().replace(':', '')};`)
+        let $ = cheerio.load(body)
+        
+        let sinonimos = {}
+
+        $('.s-wrapper').each(function() {
+            let sentido = cheerio.load($(this).html())('div.sentido').text().replace(':', '')
+                let arraySin = []
+            cheerio.load($(this).html())('a.sinonimo').each(function (){
+                arraySin.push($(this).text())
+            })
+            sinonimos[sentido] = arraySin
+        })
+        console.log(sinonimos)
+        
+    })
+    
+    
+app.get('/', function (req, res) {
 })
-
-console.log()   //distanciar
-console.log('Sinonimos:')
-let sinonimos = $('a.sinonimo').each(function () {
-    console.log(`${$(this).text()};`)
-})
-
-// console.log(sinonimos.text())
-})
-
-
-
 
 const port = 3000
-
-app.get('/', function (req, res) {
-
-})
 
 app.listen(port, function () {
     console.log(`App rodando em http://localhost:${port}`)
