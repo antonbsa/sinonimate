@@ -7,7 +7,7 @@ const app = express()
 
 
     const hostname = 'https://www.sinonimos.com.br/'
-    const path = 'teste'
+    const path = 'sentido'
     
     request({url: `${hostname}${path}`, encoding: 'binary'}, function(err, response, body) {
 
@@ -18,7 +18,12 @@ const app = express()
         let sinonimos = {}
 
         $('.s-wrapper').each(function() {
-            let sentido = cheerio.load($(this).html())('div.sentido').text().replace(':', '')
+            let sentido = cheerio.load($(this).html())('div.sentido').text()
+            let aux = sentido.substring(0, sentido.length - 1)
+                .normalize('NFD')
+                .replace(/[^a-zA-Zs ]/g, '')
+                .replace(' ', '_')
+            sentido = aux
                 let arraySin = []
             cheerio.load($(this).html())('a.sinonimo').each(function (){
                 arraySin.push($(this).text())
