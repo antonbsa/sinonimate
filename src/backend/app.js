@@ -20,15 +20,12 @@ const app = express()
         $('.s-wrapper').each(function() {
             let sentido = cheerio.load($(this).html())('div.sentido').text()
             let aux = sentido.substring(0, sentido.length - 1)
-                .normalize('NFD')
-                .replace(/[^a-zA-Zs ]/g, '')
-                .replace(' ', '_')
             sentido = aux
                 let arraySin = []
             cheerio.load($(this).html())('a.sinonimo').each(function (){
                 arraySin.push($(this).text())
             })
-            sinonimos[sentido] = arraySin
+            sinonimos[`${sentido}`] = arraySin
         })
         console.log(sinonimos)
         
