@@ -11,10 +11,22 @@
         <h1 class="">SinoniMate</h1>
     </div>
     <div>
-        <form action="http://localhost:3000/" form="GET">
-            <input name="q" type="text" placeholder="Sinônimos de:">
+        <form id="form" action="http://locahost:3000/" form="post">
+            <input name="q" id="q" type="text" placeholder="Sinônimos de:" required>
             <input type="submit" value="Procurar">
         </form>
     </div>
+<script>
+    var form = document.getElementById('form');
+    var campo = document.getElementsByName('q');
+
+    form.addEventListener('submit', function(e) {
+        alert(campo[0].value);
+
+        window.location.href = `http://localhost:3000/${campo[0].value}`
+
+        e.preventDefault();
+    });
+</script>
 </body>
 </html>

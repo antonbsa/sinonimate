@@ -10,6 +10,7 @@ const hostname = 'https://www.sinonimos.com.br/'
 
 app.get('/:word', function (req, res) {
     const { word } = req.params
+
     
     request({url: `${hostname}${word}`, encoding: 'binary'}, function(err, response, body) {
         
@@ -36,7 +37,6 @@ app.get('/:word', function (req, res) {
     }
 
     res.send(catchSinonimos())
-    
     })
     
 })
