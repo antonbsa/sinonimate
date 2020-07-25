@@ -1,16 +1,18 @@
 const express = require('express')
 const cheerio = require('cheerio')
 const request = require('request-promise')
+const cors = require('cors')
 const { send } = require('process')
 
 const app = express()
 
-const hostname = 'https://www.sinonimos.com.br/'
+app.use(cors())
+app.use(express.json())
 
+const hostname = 'https://www.sinonimos.com.br/'
 
 app.get('/:word', function (req, res) {
     const { word } = req.params
-
     
     request({url: `${hostname}${word}`, encoding: 'binary'}, function(err, response, body) {
         
@@ -23,8 +25,8 @@ app.get('/:word', function (req, res) {
         function catchSinonimos () {
             $('.s-wrapper').each(function() {
                 let sentido = cheerio.load($(this).html())('div.sentido').text()
-            let aux = sentido.substring(0, sentido.length - 1)
-            sentido = aux
+                let aux = sentido.substring(0, sentido.length - 1).toLowerCase()
+                sentido = aux
                 let arraySin = []
                 
             cheerio.load($(this).html())('a.sinonimo').each(function (){
@@ -35,9 +37,9 @@ app.get('/:word', function (req, res) {
         return sinonimos
         // console.log(sinonimos)
     }
+    return res.json(catchSinonimos())
 
-    res.send(catchSinonimos())
-    })
+})
     
 })
 
