@@ -1,7 +1,9 @@
 const button = document.getElementById('button')
 const path = document.getElementsByName('q')
 const content = document.getElementById('content')
-
+const section = document.getElementById('content')
+const list = document.getElementById('list')
+    
 button.onclick = function(e) {
     e.preventDefault()
     
@@ -14,20 +16,33 @@ button.onclick = function(e) {
         return elem.charAt(0).toUpperCase() + elem.slice(1)
     }
 
+    // LOADING
+    list.style.opacity = 0.4
+    document.getElementById('loading').style.display = 'block'
+    
+
     fetch(`http://localhost:3000/${path[0].value}`, { headers: myHeader, mode: "cors"})
-    .then(resp => resp.clone().json()) 
+    .then(resp => resp.clone().json())
     .then(function(data){
-        const section = document.getElementById('content')
+        // FIM LOADING
+        document.getElementById('loading').style.display = 'none'
+        list.innerHTML = ''
+        list.style.opacity = 1  
+        
         const key = Object.keys(data)
         const entries = Object.entries(data)
 
-        console.log('entries 1')
-        console.log(entries[0][1][0])
+        node = document.createElement('h1')
+        textNode = document.createTextNode(`Mostrando sinônimos de ${path[0].value.toUpperCase()}:`)
+        node.appendChild(textNode)
+        list.appendChild(node)
+
+
         for(i = 0; i < entries.length; i++){
             let node = document.createElement('ul')
             let textNode = document.createTextNode(capitalize(key[i]))
             node.appendChild(textNode)
-            section.appendChild(node)
+            list.appendChild(node)
 
             for(j = 0; j < entries[i][1].length; j++){
                 let node = document.createElement('li')
@@ -35,9 +50,8 @@ button.onclick = function(e) {
                 node.setAttribute(name, value) */
                 let textNode = document.createTextNode(entries[i][1][j])
                 node.appendChild(textNode)
-                section.appendChild(node)
+                list.appendChild(node)
             }
         }
-        return Object.values(data)
     })
 }

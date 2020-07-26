@@ -1,0 +1,24 @@
+div.container {
+    margin-top: 40px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: fit-content;
+}
+
+div#list {
+    background-color: rgb(219, 213, 213);
+    transition: 0.4s;
+}
+
+div#loading {
+    display: none;
+    position: absolute;
+}
+
+div#loading img {
+    width: 150px;
+    height: 150px;
+}

@@ -4,22 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../../backend/app.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <title>SinoniMate</title>
 </head>
 <body>
     <div class="header">
-        <h1 class="">SinoniMate</h1>
+        <div class="">
+            <h1 class="">SinoniMate</h1>
+        </div>
+        <div class="search-field">
+            <form id="form" form="post">
+                <input required name="q" id="q" type="text" placeholder="Sinônimos de:" required>
+                <input id="button" type="submit" value="Procurar">
+            </form>
+        </div>
     </div>
-    <div>
-        <form id="form" form="post">
-            <input name="q" id="q" type="text" placeholder="Sinônimos de:" required>
-            <input id="button" type="submit" value="Procurar">
-        </form>
+    <div class="container">
+        <section id="content">
+            <div id="loading">
+                <img src="https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif">
+            </div>
+            <div id="list"></div>
+        </section>
     </div>
-    <section id="content"></section>
-    <br>
+    <br> <!-- Espaçamento entre o Footer -->
     <footer>Fim da página</footer>
     <script src="../../backend/search.js"></script>
-<!-- <script src="../../backend/redirect.js"></script> -->
 </body>
 </html>
