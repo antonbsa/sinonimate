@@ -48,7 +48,7 @@ app.get('/', function (req, res) {
 })
 
 const port = 3000
-app.listen(port, function () {
+app.listen(process.env.PORT || port, function () {
     console.log(`App rodando em http://localhost:${port}`)
     console.log()   //distanciar
 })
