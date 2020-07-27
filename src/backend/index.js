@@ -2,7 +2,6 @@ const express = require('express')
 const cheerio = require('cheerio')
 const request = require('request-promise')
 const cors = require('cors')
-const { send } = require('process')
 
 const app = express()
 
@@ -29,13 +28,12 @@ app.get('/:word', function (req, res) {
                 sentido = aux
                 let arraySin = []
                 
-            cheerio.load($(this).html())('a.sinonimo').each(function (){
+                cheerio.load($(this).html())('a.sinonimo').each(function (){
                 arraySin.push($(this).text())
             })
             sinonimos[`${sentido}`] = arraySin
         })
         return sinonimos
-        // console.log(sinonimos)
     }
     return res.json(catchSinonimos())
 
