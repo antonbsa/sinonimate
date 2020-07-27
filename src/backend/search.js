@@ -1,12 +1,14 @@
+import { teste, teste2} from "./htmlConstructor.js"
+
 const button = document.getElementById('button')
 const path = document.getElementsByName('q')
-const content = document.getElementById('content')
-const section = document.getElementById('content')
 const list = document.getElementById('list')
 let objAux = {}
     
 button.onclick = function(e) {
     e.preventDefault()
+    teste()
+    teste2()
 
     if(window.sessionStorage.getItem('words') === null) {
         window.sessionStorage.setItem('words', JSON.stringify(objAux))
@@ -14,7 +16,7 @@ button.onclick = function(e) {
         let objParse = JSON.parse(window.sessionStorage.getItem('words'))
         let objKey = Object.keys(objParse)
 
-        for(i in objKey) {
+        for(let i in objKey) {
             if(objKey[i] === path[0].value){
                 console.log('encontrado!')
             }
@@ -46,24 +48,24 @@ button.onclick = function(e) {
         const key = Object.keys(data)
         const entries = Object.entries(data)
 
-        node = document.createElement('h1')
-        textNode = document.createTextNode(`Mostrando sinônimos de ${path[0].value.toUpperCase()}:`)
+        let node = document.createElement('h1')
+        let textNode = document.createTextNode(`Mostrando sinônimos de ${path[0].value.toUpperCase()}:`)
         node.appendChild(textNode)
         list.appendChild(node)
 
         let objParse = JSON.parse(window.sessionStorage.getItem('words'))
         let objWords = {}
 
-        for(i = 0; i < entries.length; i++){
+        for(let i = 0; i < entries.length; i++){
             let capWord = capitalize(key[i])
             let arrayAux = []
 
-            let node = document.createElement('ul')
-            let textNode = document.createTextNode(capWord)
+            node = document.createElement('ul')
+            textNode = document.createTextNode(capWord)
             node.appendChild(textNode)
             list.appendChild(node)
 
-            for(j = 0; j < entries[i][1].length; j++){
+            for(let j = 0; j < entries[i][1].length; j++){
                 let node = document.createElement('li')
                 
                 /* set tag attributes
