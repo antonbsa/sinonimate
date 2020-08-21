@@ -1,38 +1,49 @@
-import { path, listBuilder } from "./htmlConstructor.js"
-import { searchWord, endLoading } from './search.js'
+import { path, listBuilder, list} from "./htmlConstructor.js"
+import { searchWord, endLoading, loading} from './search.js'
 
 const button = document.getElementById('button')
 let objAux = {}
-    
+
 button.onclick = function(e) {
     e.preventDefault()
-
+    let arrayValues = path[0].value.split(' ')
+    
     if(window.sessionStorage.getItem('words') === null) {
         window.sessionStorage.setItem('words', JSON.stringify(objAux))
         console.log('sessionStorage Criada!')
-
-        searchWord()
+        
+        // list.innerHTML = ''
+        searchWord(arrayValues)
+        endLoading()
     } else {
         let objParse = JSON.parse(window.sessionStorage.getItem('words'))
         let objKey = Object.keys(objParse)
-        let foundWord = ''
-
-        for(let i in objKey) {
-            if(objKey[i] === path[0].value){
-                console.log('encontrado!')
-                foundWord = objKey[i]
-                break
+        let arrayWordFound = []
+        
+        for(let j in arrayValues){
+            for(let i in objKey) {
+                if(objKey[i] === arrayValues[j]){
+                    console.log(`palavra ${arrayValues[j]}`)
+                    arrayWordFound.push(objKey[i])
+                    break
+                }
             }
         }
+        
+        if(arrayWordFound.length > 0) {
+            console.log('achou besteirinha ein')
+            let data
 
-        if(foundWord !== '') {
-            let data = objParse[`${foundWord}`]
-            console.log(data)
-            endLoading()
-            listBuilder(data)
+            list.innerHTML = ''
+            for(let i in arrayWordFound){
+                data = objParse[`${arrayWordFound[i]}`]
+            }
+            arrayValues.forEach((e) => { 
+                listBuilder(data, e)
+            })
         } else {
-            searchWord()
+            list.innerHTML = ''
+            searchWord(arrayValues)
         }
     }
-
 }

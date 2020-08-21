@@ -5,12 +5,12 @@ export function capitalize(elem) {
     return elem.charAt(0).toUpperCase() + elem.slice(1)
 }
 
-export function listBuilder(data) {
+export function listBuilder(data, word) {
     const key = Object.keys(data)
     const entries = Object.entries(data)
 
     let node = document.createElement('h1')
-    let textNode = document.createTextNode(`Mostrando sinônimos de ${path[0].value.toUpperCase()}:`)
+    let textNode = document.createTextNode(`Mostrando sinônimos de ${word.toUpperCase()}:`)
     node.appendChild(textNode)
     list.appendChild(node)
 
@@ -41,6 +41,6 @@ export function listBuilder(data) {
         objWords[key[i]] = arrayAux
     }
     // saving in sessionStorage
-    objParse[`${path[0].value}`] = objWords
+    objParse[`${word}`] = objWords
     window.sessionStorage.setItem('words', JSON.stringify(objParse))
 }

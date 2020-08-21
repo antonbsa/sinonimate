@@ -7,22 +7,30 @@ export function loading() {
 
 export function endLoading() {
     document.getElementById('loading').style.display = 'none'
-    list.innerHTML = ''
+    // list.innerHTML = ''
     list.style.opacity = 1
 }
 
-export function searchWord() {
+export function searchWord(array) {
     const myHeader = new Headers()
     myHeader.append("Access-Control-Allow-Origin", "*")
 
-    console.log(path[0].value)
+    console.log(`array: ${array}`)
 
     loading()
 
-    fetch(`http://localhost:3000/${path[0].value}`, { headers: myHeader, mode: "cors"})
-    .then(resp => resp.clone().json())
-    .then(function(data){
-        endLoading()        
-        listBuilder(data)
+    array.forEach((e) => { 
+        console.log(`e: ${e}`)
+        
+        fetch(`http://localhost:3000/${e}`, { headers: myHeader, mode: "cors"})
+        .then(resp => {
+            list.innerHTML = ''
+            resp.clone().json() 
+            
+            .then(function(data){
+                console.log(data)
+                listBuilder(data, e)
+            }).then(() => { endLoading() })
+        })
     })
 }
