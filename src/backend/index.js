@@ -2,15 +2,22 @@ const express = require('express')
 const cheerio = require('cheerio')
 const request = require('request-promise')
 const cors = require('cors')
+const path = require('path')
 
 const app = express()
 
-app.use(cors())
-app.use(express.json())
+app
 
 const hostname = 'https://www.sinonimos.com.br/'
+const port = 3000
 
-app.get('/:word', function (req, res) {
+app
+
+.use(cors())
+.use(express.static(path.join(__dirname, '../frontend')))
+.use(express.json())
+
+.get('/:word', function (req, res) {
     const { word } = req.params
     
     request({url: `${hostname}${word}`, encoding: 'binary'}, function(err, response, body) {
@@ -40,13 +47,10 @@ app.get('/:word', function (req, res) {
 })
     
 })
-
-app.get('/', function (req, res) {
-    res.send('OK')
+.get('/', function (req, res) {
+    res.render('index')
 })
-
-const port = 3000
-app.listen(process.env.PORT || port, function () {
+.listen(process.env.PORT || port, function () {
     console.log(`App rodando em http://localhost:${port}`)
     console.log()   //distanciar
 })
