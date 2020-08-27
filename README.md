@@ -1,4 +1,4 @@
-# Sinonimate
+# Sinonimate ([acesse aqui](https://sinonimate.herokuapp.com))
 
 App que busca sinônimos da palavra inserida pelo usuário via **web scraper** do site [Sinônimos](https://www.sinonimos.com.br/).
 
