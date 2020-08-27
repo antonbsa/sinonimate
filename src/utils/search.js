@@ -22,7 +22,7 @@ export function searchWord(array) {
     array.forEach((e) => { 
         console.log(`e: ${e}`)
         
-        fetch(`http://localhost:3000/${e}`, { headers: myHeader, mode: "cors"})
+        fetch(e, { headers: myHeader, mode: "cors"})
         .then(resp => {
             list.innerHTML = ''
             resp.clone().json() 
