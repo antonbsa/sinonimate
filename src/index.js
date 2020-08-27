@@ -3,6 +3,7 @@ const cheerio = require('cheerio')
 const request = require('request-promise')
 const cors = require('cors')
 const path = require('path')
+const fs = require('fs')
 
 const app = express()
 
@@ -13,8 +14,13 @@ const port = 3000
 
 app
 
+/* .set('views', __dirname + '/views')
+.set('view engine', 'html')
+.engine('html', require('ejs').renderFile) */
+
 .use(cors())
-.use(express.static(path.join(__dirname, '../frontend')))
+.use(express.static(path.join(__dirname, '../public')))
+.use('/utils', express.static(path.join(__dirname, '/utils')))
 .use(express.json())
 
 .get('/:word', function (req, res) {
@@ -47,8 +53,13 @@ app
 })
     
 })
-.get('/', function (req, res) {
-    res.render('index')
+.get('/', function(req, res){
+    fs.readFile('src/views/index.html', function(err, data) {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(data);
+        return res.end()
+    })
+   // res.render('index')
 })
 .listen(process.env.PORT || port, function () {
     console.log(`App rodando em http://localhost:${port}`)

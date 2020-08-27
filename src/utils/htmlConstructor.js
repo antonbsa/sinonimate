@@ -44,3 +44,10 @@ export function listBuilder(data, word) {
     objParse[`${word}`] = objWords
     window.sessionStorage.setItem('words', JSON.stringify(objParse))
 }
+
+/* module.exports = {
+    path,
+    list,
+    capitalize,
+    listBuilder
+} */

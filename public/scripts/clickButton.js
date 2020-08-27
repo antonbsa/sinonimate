@@ -1,11 +1,23 @@
-import { path, listBuilder, list} from "./htmlConstructor.js"
-import { searchWord, endLoading, loading} from './search.js'
+import { path, listBuilder, list} from "/utils/htmlConstructor.js"
+import { searchWord, endLoading, loading} from "/utils/search.js"
 
 const button = document.getElementById('button')
 let objAux = {}
 
+document.getElementById('q').addEventListener('keypress', function(e) {
+    if(e.keyCode == 13){
+        clicked()
+    }
+})
+
 button.onclick = function(e) {
+    console.log('clicado')
     e.preventDefault()
+    
+    clicked()
+}
+
+function clicked() {
     let arrayValues = path[0].value.split(' ')
     
     if(window.sessionStorage.getItem('words') === null) {
@@ -13,6 +25,7 @@ button.onclick = function(e) {
         console.log('sessionStorage Criada!')
         
         // list.innerHTML = ''
+        loading()
         searchWord(arrayValues)
         endLoading()
     } else {
