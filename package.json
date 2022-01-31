@@ -1,11 +1,12 @@
 {
-  "name": "sinonimate_next",
+  "name": "sinonimate",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "start": "node src/index.js",
+    "dev": "npx next dev",
+    "start": "npx next start",
+    "build": "npx next build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

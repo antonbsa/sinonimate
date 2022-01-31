@@ -16,7 +16,7 @@ export default function Home() {
   async function handleRequest() {
     const fullExpression = inputValue.trim().replace(' ', '+');
 
-    // TODO: warnn need a word OR block search button
+    // TODO: warn => need a word OR block search button
     // if (concatWords.length === 1 && !concatWords[0]) return;
     if (fullExpression.length === 0) return;
 
