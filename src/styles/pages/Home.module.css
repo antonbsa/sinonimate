@@ -1,30 +1,6 @@
-.content {
-  margin-top: 40px;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  width: fit-content;
-}
-
-.content#list {
-  background-color: rgb(219, 213, 213);
-  transition: 0.4s;
-}
-
-.content#loading {
-  display: none;
-  position: absolute;
-}
-
-s.content#loading img {
-  width: 150px;
-  height: 150px;
-
-  display: block;
-}
-
-footer.footer {
-  margin-top: 10px;
+.container {
+  background-color: gray;
+  margin: 15px;
+  border: thick double rgb(196, 196, 196);
+  box-shadow: 0 0 1em rgba(255, 255, 255, 0.555);
 }
