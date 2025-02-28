@@ -1,13 +1,6 @@
 export default function DataList(props) {
-  const {
-    word
-  } = props;
-
-  const {
-    wordValue,
-    synonyms,
-  } = word;
-
+  const { word } = props;
+  const { wordValue, synonyms } = word;
   const senses = Object.keys(synonyms);
 
   function renderBySense(sense) {
