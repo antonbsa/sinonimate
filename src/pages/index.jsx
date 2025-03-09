@@ -3,6 +3,7 @@ import axios from 'axios';
 import DataList from '../components/DataList';
 import Head from 'next/head';
 import styles from '../styles/pages/Home.module.css'
+import EditableText from '../components/EditableText';
 
 
 export default function Home() {
@@ -49,7 +50,7 @@ export default function Home() {
           <h1>SinoniMate</h1>
         </div>
         <div className="search-field">
-          <input name="q" id="q" onChange={e => setInputValue(e.target.value)} type="text" placeholder="Sinônimos de:" required />
+          <EditableText />
           <button id="button" onClick={handleRequest}>
             Procurar
           </button>
