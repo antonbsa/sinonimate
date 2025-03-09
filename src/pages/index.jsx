@@ -1,8 +1,6 @@
-import { useState } from "react";
-import axios from "axios";
-
+import { useState } from 'react';
+import axios from 'axios';
 import DataList from '../components/DataList';
-
 import Head from 'next/head';
 import styles from '../styles/pages/Home.module.css'
 
@@ -21,8 +19,8 @@ export default function Home() {
     if (fullExpression.length === 0) return;
 
     try {
-      const { data } = await axios.get(`/api/${fullExpression}`);
-      const isEmptyResponse = Object.keys(data).length === 0;
+      const { data: synonyms } = await axios.get(`/api/${fullExpression}`);
+      const isEmptyResponse = Object.keys(synonyms).length === 0;
       if (isEmptyResponse) {
         setWasSearched(true);
         return;
@@ -32,7 +30,7 @@ export default function Home() {
         // ...words,
         {
           wordValue: fullExpression,
-          synonyms: data,
+          synonyms: synonyms,
         }
       ]);
       setWasSearched(true);

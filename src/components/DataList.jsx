@@ -1,14 +1,8 @@
 export default function DataList(props) {
-  const {
-    word
-  } = props;
-
-  const {
-    wordValue,
-    synonyms,
-  } = word;
-
+  const { word } = props;
+  const { wordValue, synonyms } = word;
   const senses = Object.keys(synonyms);
+  console.log({ props })
 
   function renderBySense(sense) {
     return (
@@ -25,7 +19,7 @@ export default function DataList(props) {
 
   return (
     <div>
-      <h1>Resultados para {wordValue}:</h1>
+      <h1>Resultados para {wordValue.toUpperCase()}:</h1>
       {senses.map(sense => (
         renderBySense(sense)
       ))}
